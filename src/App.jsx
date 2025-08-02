@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-const socket = io('http://localhost:5000');
+const socket = io("https://chat-backend-ylef.onrender.com");
 
 function App() {
   const [username, setUsername] = useState('');
