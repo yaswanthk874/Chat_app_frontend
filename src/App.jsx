@@ -10,17 +10,19 @@ function App() {
   const [messages, setMessages] = useState([]);
 
   // Load messages from DB
-  useEffect(() => {
-    axios.get('http://localhost:5000/messages')
-      .then(res => setMessages(res.data));
+useEffect(() => {
+  // ✅ Connect to deployed backend
+  axios.get('https://chat-backend-ylef.onrender.com/messages')
+    .then(res => setMessages(res.data));
 
-    // Listen for new messages
-    socket.on('chat message', msg => {
-      setMessages(prev => [...prev, msg]);
-    });
+  // ✅ Listen to new messages via WebSocket
+  socket.on('chat message', msg => {
+    setMessages(prev => [...prev, msg]);
+  });
 
-    return () => socket.off('chat message');
-  }, []);
+  return () => socket.off('chat message');
+}, []);
+
 
   const sendMessage = () => {
     if (!username || !text) return;
